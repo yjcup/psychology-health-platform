@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TestRecordMapper">
+
+    <resultMap type="TestRecord" id="TestRecordResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="score"    column="score"    />
+        <result property="result"    column="result"    />
+        <result property="type"    column="type"    />
+    </resultMap>
+
+    <sql id="selectTestRecordVo">
+        select id, user_id, create_time, score, result, type from test_record
+    </sql>
+
+    <select id="selectTestRecordList" parameterType="TestRecord" resultMap="TestRecordResult">
+        <include refid="selectTestRecordVo"/>
+        <where>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="score != null "> and score &lt;= #{score}</if>
+        </where>
+    </select>
+
+    <select id="selectTestRecordById" parameterType="Long" resultMap="TestRecordResult">
+        <include refid="selectTestRecordVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTestRecord" parameterType="TestRecord" useGeneratedKeys="true" keyProperty="id">
+        insert into test_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="score != null">score,</if>
+            <if test="result != null">result,</if>
+            <if test="type != null">type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="score != null">#{score},</if>
+            <if test="result != null">#{result},</if>
+            <if test="type != null">#{type},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTestRecord" parameterType="TestRecord">
+        update test_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="score != null">score = #{score},</if>
+            <if test="result != null">result = #{result},</if>
+            <if test="type != null">type = #{type},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTestRecordById" parameterType="Long">
+        delete from test_record where id = #{id}
+    </delete>
+
+    <delete id="deleteTestRecordByIds" parameterType="String">
+        delete from test_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <select id="selectCount" resultType="Integer">
+        select count(1) from test_record
+    </select>
+
+
+    <select id="selectRank" resultType="Integer" >
+        select rank() over(order by score desc ) as 'Rank' from test_record where score = #{score} and type = #{type} order by score desc limit 0,1
+    </select>
+
+</mapper>

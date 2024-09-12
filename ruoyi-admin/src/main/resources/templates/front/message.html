@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <base th:href="@{/}">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Slek - Chat and Discussion Platform</title>
+
+    <!-- Favicon -->
+
+    <!-- Bundle Styles -->
+    <link rel="stylesheet" href="css/bundle.css">
+
+    <link rel="stylesheet" href="css/enjoyhint.css">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="css/app.min.css">
+
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap-front.min.css" rel="stylesheet" />
+    <!-- FlatIcon CSS -->
+    <link href="css/flaticon.css" rel="stylesheet" />
+    <!-- IcoFont CSS -->
+    <link href="css/icofont.min.css" rel="stylesheet" />
+    <!-- Animate CSS -->
+    <link href="css/animate.css" rel="stylesheet" />
+    <!-- Owl Carousel CSS -->
+    <link href="css/owl.carousel.css" rel="stylesheet" />
+    <!-- Hamburgers CSS -->
+    <link href="css/hamburgers.min.css" rel="stylesheet" />
+    <!-- Style CSS -->
+    <link href="css/style-front.css" rel="stylesheet" />
+    <!-- Responsive CSS -->
+    <link href="css/responsive.css" rel="stylesheet" />
+</head>
+<style>
+    .layout .content .chat .chat-body .messages .messages-divider:before{
+        width: 100px;
+        font-size: 20px;
+    }
+</style>
+<body>
+
+<!-- page loading -->
+<div class="page-loading"></div>
+<!-- ./ page loading -->
+
+<header>
+    <div th:replace="~{front/common::topbar}"></div>
+</header><!-- header -->
+<!-- layout -->
+<div class="layout">
+
+
+    <!-- navigation -->
+    <nav class="navigation">
+        <div class="nav-group">
+            <ul>
+                <li>
+                    <a class="active" data-navigation-target="chats" href="#" data-toggle="tooltip" title="Chats"
+                       data-placement="right">
+                        <span class="badge badge-warning"></span>
+                        <i data-feather="message-circle"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="dark-light-switcher" data-toggle="tooltip" title="Dark mode"
+                       data-placement="right">
+                        <i data-feather="moon"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <!-- ./ navigation -->
+
+    <!-- content -->
+    <div class="content">
+
+
+
+        <!-- chat -->
+        <div class="chat">
+            <div class="chat-header">
+<!--                <div class="chat-header-user">-->
+<!--                    <figure class="avatar">-->
+<!--                        <img src="./dist/media/img/man_avatar3.jpg" class="rounded-circle" alt="image">-->
+<!--                    </figure>-->
+<!--                    <div>-->
+<!--                        <h5>Byrom Guittet</h5>-->
+<!--                        <small class="text-success">-->
+<!--                            <i>writing...</i>-->
+<!--                        </small>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+            <div class="chat-body"> <!-- .no-message -->
+
+                <div class="messages">
+
+
+                </div>
+            </div>
+            <div class="chat-footer" style="padding-bottom: 100px">
+                <form>
+                    <!-- <input type="textarea" class="form-control" placeholder="Write a message."> -->
+                    <textarea id="story" name="story"  rows="3" style="width: 100%;" placeholder="请输入聊天内容"></textarea>
+                    <div class="form-buttons">
+
+                        <button class="btn btn-primary btn-lg" type="submit">
+                            <i data-feather="send"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- ./ chat -->
+
+    </div>
+    <!-- ./ content -->
+
+</div>
+<!-- ./ layout -->
+
+<script src="js/jquery-1.12.4.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="js/bootstrap.bundle.min.js"></script>
+<!-- Owl Carousel JS -->
+<script src="js/owl.carousel.js"></script>
+<!-- Wow.js -->
+<script src="js/wow.min.js"></script>    <!-- WayPoints JS -->
+<script src="js/jquery.waypoints.min.js"></script>
+<!-- CounterUp JS -->
+<script src="js/jquery.counterup.min.js"></script>
+<!-- Smooth Scroll JS -->
+<!-- Main.js -->
+<script src="js/main.js"></script>
+
+
+<!-- Bundle -->
+<script src="js/bundle.js"></script>
+
+<script src="js/enjoyhint.min.js"></script>
+
+<!-- App scripts -->
+<script src="js/app.min.js"></script>
+
+<script th:inline="javascript">
+
+    var userid = [[${userid}]]
+    var doctorid = 2
+    var username = "123"
+    var messages = [[${messages}]]
+    var userURL = "img/avt.png";
+    var robotURL = 'img/robot.jpg'
+    if (doctorid==null) doctorid = 999;
+    $(function () {
+        /**
+         * Some examples of how to use features.
+         *
+         **/
+        var socket;
+        if (typeof (WebSocket) == "undefined") {
+            console.log("您的浏览器不支持WebSocket");
+        } else {
+            console.log("您的浏览器支持WebSocket");
+            //from
+            //
+            var socketUrl = "ws://localhost/websocket/"+userid+"/"+doctorid;
+            console.log(socketUrl);
+            if (socket != null) {
+                socket.close();
+                socket = null;
+            }
+            socket = new WebSocket(socketUrl);
+            //打开事件
+            socket.onopen = function () {
+                for(var i = 0;i < messages.length;i++){
+                    if(messages[i].flag==0){
+                        SohoExamle.Message.add(messages[i].content, 'outgoing-message');
+                    }else{
+                        SohoExamle.Message.addrobot(messages[i].content);
+                    }
+                }
+                $(".messages").append('<div class="message-item messages-divider sticky-top" data-label="历史聊天"></div>\n');
+                console.log("websocket已打开");
+            };
+            //获得消息事件
+            socket.onmessage = function (msg) {
+                var message = JSON.parse(msg.data)
+                SohoExamle.Message.addMessage(message)
+                //发现消息进入    开始处理前端触发逻辑
+            };
+            //关闭事件
+            socket.onclose = function () {
+                console.log("websocket已关闭");
+            };
+            //发生了错误事件
+            socket.onerror = function () {
+                console.log("websocket发生了错误");
+            }
+        }
+        //
+
+
+        function sendMessage(message) {
+            if (typeof (WebSocket) == "undefined") {
+                console.log("您的浏览器不支持WebSocket");
+            } else {
+                socket.send(message);
+            }
+        }
+
+
+        function dateFormat(fmt, date) {
+            let ret;
+            const opt = {
+                "Y+": date.getFullYear().toString(),        // 年
+                "m+": (date.getMonth() + 1).toString(),     // 月
+                "d+": date.getDate().toString(),            // 日
+                "H+": date.getHours().toString(),           // 时
+                "M+": date.getMinutes().toString(),         // 分
+                "S+": date.getSeconds().toString()          // 秒
+                // 有其他格式化字符需求可以继续添加，必须转化成字符串
+            };
+            for (let k in opt) {
+                ret = new RegExp("(" + k + ")").exec(fmt);
+                if (ret) {
+                    fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+                };
+            };
+            return fmt;
+        }
+
+
+
+        var SohoExamle = {
+            Message: {
+                add: function (message, type) {
+                    var chat_body = $('.layout .content .chat .chat-body');
+                    if (chat_body.length > 0) {
+
+                        type = type ? type : '';
+                        message = message ? message : 'I did not understand what you said!';
+                        $('.layout .content .chat .chat-body .messages').append(`<div class="message-item ` + type + `">
+                        <div class="message-avatar">
+                            <figure class="avatar">
+                                <img src="` + userURL + `" class="rounded-circle">
+                            </figure>
+                            <div>
+                                <h5>` + (type == 'outgoing-message' ? username : 'Byrom Guittet') + `</h5>
+                                <div class="time">` + dateFormat("mm-dd HH:MM",new Date())+ `</div>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            ` + message + `
+                        </div>
+                    </div>`);
+
+
+                        setTimeout(function () {
+                            chat_body.scrollTop(chat_body.get(0).scrollHeight, -1).niceScroll({
+                                cursorcolor: 'rgba(66, 66, 66, 0.20)',
+                                cursorwidth: "4px",
+                                cursorborder: '0px'
+                            }).resize();
+                        }, 200);
+                    }
+                },
+                addMessage: function (message) {
+                    console.log(message)
+                    var chat_body = $('.layout .content .chat .chat-body');
+                    if (chat_body.length > 0) {
+                        $('.layout .content .chat .chat-body .messages').append(`<div class="message-item">
+                        <div class="message-avatar">
+                            <figure class="avatar">
+                                <img src="`+message.img+`" class="rounded-circle">
+                            </figure>
+                            <div>
+                                <h5>` + message.name + `</h5>
+                                <div class="time">` +  dateFormat("mm-dd HH:MM",new Date()) + `</div>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            ` + message.text.text + `
+                        </div>
+                    </div>`);
+
+                        setTimeout(function () {
+                            chat_body.scrollTop(chat_body.get(0).scrollHeight, -1).niceScroll({
+                                cursorcolor: 'rgba(66, 66, 66, 0.20)',
+                                cursorwidth: "4px",
+                                cursorborder: '0px'
+                            }).resize();
+                        }, 200);
+                    }
+                },
+                addrobot: function (message, type) {
+                    var chat_body = $('.layout .content .chat .chat-body');
+                    if (chat_body.length > 0) {
+
+                        type = type ? type : '';
+                        message = message ? message : 'I did not understand what you said!';
+                        $('.layout .content .chat .chat-body .messages').append(`<div class="message-item ` + type + `">
+                        <div class="message-avatar">
+                            <figure class="avatar">
+                                <img src="` + robotURL + `" class="rounded-circle">
+                            </figure>
+                            <div>
+                                <h5>` + (type == 'outgoing-message' ? username : '智能客服') + `</h5>
+                                <div class="time">` + dateFormat("mm-dd HH:MM",new Date())+ `</div>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            ` + message + `
+                        </div>
+                    </div>`);
+
+
+                        setTimeout(function () {
+                            chat_body.scrollTop(chat_body.get(0).scrollHeight, -1).niceScroll({
+                                cursorcolor: 'rgba(66, 66, 66, 0.20)',
+                                cursorwidth: "4px",
+                                cursorborder: '0px'
+                            }).resize();
+                        }, 200);
+                    }
+                },
+
+            }
+        };
+
+        setTimeout(function () {
+            // $('#disconnected').modal('show');
+            // $('#call').modal('show');
+            // $('#videoCall').modal('show');
+            $('#pageTour').modal('show');
+        }, 1000);
+
+        $(document).on('submit', '.layout .content .chat .chat-footer form', function (e) {
+            e.preventDefault();
+
+            var input = $(this).find('textarea');
+            var message = input.val();
+            message = $.trim(message);
+            sendMessage(message);
+            if (message) {
+                SohoExamle.Message.add(message, 'outgoing-message');
+                input.val('');
+                // setTimeout(function () {
+                //     SohoExamle.Message.add();
+                // }, 1);
+            } else {
+                input.focus();
+            }
+        });
+
+        $(document).on('click', '.layout .content .sidebar-group .sidebar .list-group-item', function () {
+            if (jQuery.browser.mobile) {
+                $(this).closest('.sidebar-group').removeClass('mobile-open');
+            }
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

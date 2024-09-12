@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <base th:href="@{/}">
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Medicust - Health and Medical HTML5 Template" />
+        <meta name="author" content="Envalab" />
+        <title>Blog || Medicust - Health and Medical HTML5 Template</title>
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.png" />
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet" />
+        <!-- Bootstrap CSS -->
+        <link href="css/bootstrap-front.min.css" rel="stylesheet" />
+        <!-- FlatIcon CSS -->
+        <link href="css/flaticon.css" rel="stylesheet" />
+        <!-- IcoFont CSS -->
+        <link href="css/icofont.min.css" rel="stylesheet" />
+        <!-- Animate CSS -->
+        <link href="css/animate.css" rel="stylesheet" />
+        <!-- Hamburgers CSS -->
+        <link href="css/hamburgers.min.css" rel="stylesheet" />
+        <!-- Style CSS -->
+        <link href="css/style-front.css" rel="stylesheet" />
+        <!-- Responsive CSS -->
+        <link href="css/responsive.css" rel="stylesheet" />
+        <style>
+            .page_header{
+            background: url(img/team/large.png) no-repeat center center
+            }
+            .blog-card{
+                width: 100%;
+                height: 100%;
+            }
+            img{
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- page-wrapper start -->
+        <div class="page-wrapper">
+            <header>
+                <div th:replace="~{front/common::topbar}"></div>
+            </header><!-- header -->
+            <main class="site-content">
+                <div class="page_header d-flex align-items-center">
+                    <div class="container">
+                        <section>
+                            <h2>博客列表</h2>
+                            <div class="breadcrumbs">
+                                <a href="/indexfront">Home</a>
+                                <span>Blog</span>
+                            </div>
+                        </section>
+                    </div>
+                </div><!-- /.page_header -->
+                <div class="blog_posts">
+                    <div class="container-md">
+                        <div class="row">
+                            <div class="col-xl-6" th:each="blog,blogStat:${blogs.getList}">
+                                <div class="blog-card d-flex flex-sm-row flex-column">
+                                    <div class="the_post_thumbnail">
+                                        <a href="#"><img th:src="${blog.url}" alt="Blog Title" /></a>
+                                    </div>
+                                    <div class="blog-card-body">
+                                        <span class="the_date">25, February, 2020</span>
+                                        <h2 class="the_title">
+                                            <a th:href="@{'/blogdetail/'+${blog.id}}" th:text="${blog.title}">If you find your self constantly book marking and health sections.</a>
+                                        </h2>
+                                        <a th:href="@{'/blogdetail/'+${blog.id}}" class="the_permalink">Read more <i class="icofont-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <nav class="navigation pagination">
+                        <div class="nav-links">
+                            <a class="prev page-numbers" th:href="@{/blog(pageNum=${blogs.hasPreviousPage}?${blogs.prePage}:1)}"><i class="icofont-arrow-left"></i></a>
+                            <a class="page-numbers" th:href="@{/blog}">首页</a>
+<!--                            <a class="page-numbers" href="#">1</a>-->
+<!--                            <span class="page-numbers current">2</span>-->
+<!--                            <a class="page-numbers" href="#">3</a>-->
+                            <div style="display: inline-block" th:each="page,pageStat:${blogs.navigatepageNums}">
+                                <div th:if="${page}==${blogs.pageNum}" style="display: inline-block">
+                                    <span class="page-numbers current" th:text="${page}">2</span>
+                                </div>
+                                <div th:if="${page}!=${blogs.pageNum}" style="display: inline-block">
+                                    <a class="page-numbers" th:text="${page}" th:href="#{/blog(pageNum=${page})}">3</a>
+                                </div>
+                            </div>
+                            <a class="next page-numbers" th:href="@{/blog(pageNum=${blogs.hasNextPage}?${blogs.nextPage}:1)}"><i class="icofont-arrow-right"></i></a>
+                        </div>
+                    </nav>
+                </div>
+            </main><!-- /.site-content -->
+
+        </div>
+        <!-- page-wrapper end -->
+
+        <!-- Back2Top -->
+        <div class="back2Top bg1 wave">
+            <i class="icofont-dotted-up text-white"></i>
+        </div>
+
+        <!-- Required JavaScript Files -->
+        <!-- jQuery JS -->
+        <script src="js/jquery-1.12.4.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <!-- Wow.js -->
+        <script src="js/wow.min.js"></script>
+        <!-- Smooth Scroll JS -->
+        <script src="js/SmoothScroll.js"></script>
+        <!-- Main.js -->
+        <script src="js/main.js"></script>
+    </body>
+</html>

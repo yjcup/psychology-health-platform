@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg main-nav sticky" th:fragment="topbar">
+    <div class="container-xl px-15 px-lg-0">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_menu" aria-controls="main_menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="main_menu">
+            <ul class="navbar-nav ml-auto">
+                <li  >
+                    <a href="/indexfront">主页</a>
+                </li>
+                <li>
+                    <a href="/blog">博客</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#" id="pages_all" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        心理评测
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="pages_all">
+                        <li><a href="/test/1">抑郁自评量表(SDS)</a></li>
+                        <li><a href="/test/2">焦虑自评量表(SAS)</a></li>
+                        <li><a href="/test/3">UCLA 孤独量表</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/message">机器人聊天</a>
+                </li>
+                <li>
+                    <a href="/contact">留言</a>
+                </li>
+
+            </ul>
+            <div class="d-block d-md-none">
+                <p class="topbar-info">
+                    <i class="icofont-google-map"></i>
+                    <span>9470 Riverview, Zion 60099</span>
+                </p>
+                <p class="topbar-info">
+                    <i class="icofont-envelope-open"></i>
+                    <span>medicust@gmail.com</span>
+                </p>
+                <p class="topbar-info">
+                    <i class="icofont-headphone-alt-1"></i>
+                    <span>+88 564 867 4687</span>
+                </p>
+            </div>
+            <span class="navbar-text">
+                                <a href="/login" class="theme-btn" style="padding: 10px 20px;font-size: 15px" th:if="${#session==null?'true':#session.getAttribute('org.apache.shiro.subject.support.DefaultSubjectContext_PRINCIPALS_SESSION_KEY'==null)}">登录</a>
+                                                <a href="/index" class="theme-btn"  style="padding: 10px 20px;font-size: 15px;margin-left: 40px">后台管理</a>
+
+                            </span>
+
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <base th:href="@{/}">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Medicust - Health and Medical HTML5 Template" />
+        <meta name="author" content="Envalab" />
+        <title>心理健康测试平台</title>
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.png" />
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet" />
+        <!-- Bootstrap CSS -->
+        <link href="css/bootstrap-front.min.css" rel="stylesheet" />
+        <!-- FlatIcon CSS -->
+        <link href="css/flaticon.css" rel="stylesheet" />
+        <!-- IcoFont CSS -->
+        <link href="css/icofont.min.css" rel="stylesheet" />
+        <!-- Animate CSS -->
+        <link href="css/animate.css" rel="stylesheet" />
+        <!-- Owl Carousel CSS -->
+        <link href="css/owl.carousel.css" rel="stylesheet" />
+        <!-- Hamburgers CSS -->
+        <link href="css/hamburgers.min.css" rel="stylesheet" />
+        <!-- Style CSS -->
+        <link href="css/style-front.css" rel="stylesheet" />
+        <!-- Responsive CSS -->
+        <link href="css/responsive.css" rel="stylesheet" />
+        <style>
+            .hero-section{
+                background: url(img/background.jpg) no-repeat center center;
+                height: 500px;
+            }
+            .hero-content > p{
+                color: white;
+            }
+            img{
+                width: 270px;
+                height: 230px;
+            }
+            .team-member{
+                height: 400px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- page-wrapper start   开始的标签-->
+    <div class="page-wrapper">
+            <header>
+            <div th:replace="~{front/common::topbar}"></div>
+            </header><!-- header -->
+            <main class="site-content">
+                <div class="hero-section">
+                    <div class="container-lg h-100 px-lg-0">
+                        <div class="row h-100 justify-content-lg-start justify-content-center align-items-center">
+                            <div class="col-xl-6 col-lg-8">
+                                <div class="hero-content">
+                                    <h3>心理评测</h3>
+                                    <!-- <h2>A professional and friendly care provider.</h2> -->
+                                    <p>大量研究表明，良好的心理健康可以让人们在生活、工作、学习的过程中，积极应对各种压力和挑战，避免情绪化的反应，有更强的适应能力，更能够保持冷静和理智。</p>
+                                    <a href="#tests" class="theme-btn">快速开始 <i class="icofont-arrow-right"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.hero-section -->
+                <div class="team-section">
+                    <div class="container">
+                        <div class="row justify-content-center"  id="tests">
+                            <div class="section-header text-center col-lg-8">
+                                <h2>心理评测</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-lg px-lg-0">
+                        <div class="row">
+                            <div class="col-xl-4 col-md-4 col-sm-6">
+                                <div class="team-member">
+                                    <div class="member-photo">
+                                        <img src="img/index-test1.jpg" alt="Team Member Name" />
+                                    </div>
+                                    <h2><a href="/test/1">抑郁自评量表(SDS)</a></h2>
+                                    <p>抑郁自评量表(SDS)是一种常用的测量抑郁症状严重程度的工具。它由美国精神病学家Zung于1965年设计，是一种简单易用的自评量表，适用于对自己是否有抑郁症状进行评估。</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-4 col-sm-6">
+                                <div class="team-member">
+                                    <div class="member-photo">
+                                        <img src="img/index-test2.jpg" alt="Team Member Name" />
+                                    </div>
+                                    <h2><a href="/test/2">焦虑自评量表(SAS)</a></h2>
+                                    <p>焦虑自评量表(SAS)是一种常用的测量焦虑症状严重程度的工具。它由Zung于1971年设计，是一种自评量表，适用于对自己是否有焦虑症状进行评估。</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-4 col-sm-6">
+                                <div class="team-member">
+                                    <div class="member-photo">
+                                        <img src="img/index-test3.png" alt="Team Member Name" />
+                                    </div>
+                                    <h2><a href="#">UCLA 孤独量表</a></h2>
+                                    <p>UCLA孤独量表是一种常用的测量孤独感严重程度的工具。它由Russell等人于1978年设计，是一种自评量表，适用于对自己是否有孤独感进行评估。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.team-section -->
+                <div class="blog-section" >
+                    <div class="container-md px-md-0">
+                        <div class="d-flex flex-wrap blog-section-header justify-content-xl-between text-xl-left text-center align-items-center">
+                            <div class="col-xl-5">
+                                <h2>博客</h2>
+                            </div>
+                            <div class="col-xl-5 pl-xl-0">
+                                <p>了解心理知识可以帮助人们更好地认识自己，包括自己的情绪、行为和思想，帮助人们更好地解决自己的问题。</p>
+                            </div>
+                            <div class="col-xl-2">
+                                <div class="blog-carousel-control">
+                                    <span class="blog-carousel-nav btn-prev">
+                                        <i class="icofont-arrow-left"></i>
+                                    </span>
+                                    <span class="blog-carousel-nav btn-next">
+                                        <i class="icofont-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-md px-md-0">
+                        <div class="row">
+                            <div class="slide-progress"></div>
+                            <div class="blog-carousel owl-carousel">
+                                <div class="blog-card d-flex flex-sm-row flex-column" th:each="blog,blogStat:${blogs}">
+                                    <div class="the_post_thumbnail">
+                                        <img th:src="${blog.url}"  alt="Blog Title" />
+                                    </div>
+                                    <div class="blog-card-body">
+                                        <span class="the_date">25, February, 2020</span>
+                                        <h2 class="the_title">
+                                            <a th:href="@{'/blogdetail/'+${blog.id}}" th:text="${blog.title}">If you find your self constantly book marking and health sections.</a>
+                                        </h2>
+                                        <a th:href="@{'/blogdetail/'+${blog.id}}" class="the_permalink">Read more <i class="icofont-arrow-right"></i></a>
+                                        <span class="the_time">5 hours ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.blog-section -->
+            </main><!-- /.site-content -->
+
+        </div>
+        <!-- page-wrapper end -->
+
+        <div class="modal fade" id="popup-video">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <iframe src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back2Top -->
+        <div class="back2Top bg1 wave">
+            <i class="icofont-dotted-up text-white"></i>
+        </div>
+
+        <!-- Required JavaScript Files -->
+        <!-- jQuery JS -->
+        <script src="js/jquery-1.12.4.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <!-- Owl Carousel JS -->
+        <script src="js/owl.carousel.js"></script>
+        <!-- Wow.js -->
+        <script src="js/wow.min.js"></script>
+        <!-- WayPoints JS -->
+        <script src="js/jquery.waypoints.min.js"></script>
+        <!-- CounterUp JS -->
+        <script src="js/jquery.counterup.min.js"></script>
+        <!-- Smooth Scroll JS -->
+        <script src="js/SmoothScroll.js"></script>
+        <!-- Main.js -->
+        <script src="js/main.js"></script>
+
+
+        </script>
+    </body>
+</html>

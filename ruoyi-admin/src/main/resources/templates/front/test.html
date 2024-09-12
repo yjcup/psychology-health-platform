@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <base th:href="@{/}">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>jQuery在线考试倒计时界面</title>
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="css/test.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="img/favicon.png" />
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap-front.min.css" rel="stylesheet" />
+    <!-- FlatIcon CSS -->
+    <link href="css/flaticon.css" rel="stylesheet" />
+    <!-- IcoFont CSS -->
+    <link href="css/icofont.min.css" rel="stylesheet" />
+    <!-- Animate CSS -->
+    <link href="css/animate.css" rel="stylesheet" />
+    <!-- Owl Carousel CSS -->
+    <link href="css/owl.carousel.css" rel="stylesheet" />
+    <!-- Hamburgers CSS -->
+    <link href="css/hamburgers.min.css" rel="stylesheet" />
+    <!-- Style CSS -->
+    <link href="css/style-front.css" rel="stylesheet" />
+    <!-- Responsive CSS -->
+    <link href="css/responsive.css" rel="stylesheet" />
+    <style>
+        .hasBeenAnswer {
+            background: #5d9cec;
+            color: #fff;
+        }
+
+        .reading h2 {
+            width: 100%;
+            margin: 20px 0 70px;
+            text-align: center;
+            line-height: 2;
+            font-size: 20px;
+            color: #59595b;
+        }
+
+            .reading h2 a {
+                text-decoration: none;
+                color: #59595b;
+                font-size: 20px;
+            }
+
+                .reading h2 a:hover {
+                    color: #2183f1;
+                }
+                .main-nav{
+                    position: fixed;
+                }
+                .rt_nr1{
+                    margin-top: 100px;
+                }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg main-nav sticky">
+        <div class="container-xl px-15 px-lg-0 test-div" style="margin-left: 620px">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_menu" aria-controls="main_menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main_menu">
+                <ul class="navbar-nav ml-auto">
+                    <li >
+                        <a href="/indexfront">主页</a>
+                    </li>
+                    <li>
+                        <a href="/blog">博客</a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" id="pages_all" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            心理评测
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="pages_all">
+                            <li><a href="/test/1">抑郁自评量表(SDS)</a></li>
+                            <li><a href="/test/2">焦虑自评量表(SAS)</a></li>
+                            <li><a href="/test/3">UCLA 孤独量表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/message">机器人聊天</a>
+                    </li>
+                    <li>
+                        <a href="/contact">留言</a>
+                    </li>
+                </ul>
+                <div class="d-block d-md-none">
+                    <p class="topbar-info">
+                        <i class="icofont-google-map"></i>
+                        <span>9470 Riverview, Zion 60099</span>
+                    </p>
+                    <p class="topbar-info">
+                        <i class="icofont-envelope-open"></i>
+                        <span>medicust@gmail.com</span>
+                    </p>
+                    <p class="topbar-info">
+                        <i class="icofont-headphone-alt-1"></i>
+                        <span>+88 564 867 4687</span>
+                    </p>
+                </div>
+                <span class="navbar-text">
+     <a href="/login" class="theme-btn" style="padding: 10px 20px;font-size: 15px" th:if="${#session.getAttribute('org.apache.shiro.subject.support.DefaultSubjectContext_PRINCIPALS_SESSION_KEY')==null}">登录</a>
+                                                <a href="/index" class="theme-btn"  style="padding: 10px 20px;font-size: 15px;margin-left: 40px">后台管理</a>                            </span>
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+    <div class="main">
+        <!--nr start-->
+        <div class="test_main">
+            <div class="nr_left">
+                <div class="test">
+                    <form action="/test-form" method="post">
+                        <div class="test_title">
+                            <p class="test_time">
+<!--                                <i class="icon iconfont"></i><b class="alt-1">01:40</b>-->
+                            </p>
+                            <font><input type="submit" name="subtest" th:value="提交"></font>
+                        </div>
+                        <input type="text" name="submit" th:value="${testid}">
+                        <div class="test_content">
+                            <div class="test_content_title">
+                                <h2>单选题</h2>
+                                <p>
+<!--                                    <span>共</span><i class="content_lit">60</i><span>题，</span><span>合计</span><i class="content_fs">60</i><span>分</span>-->
+                                </p>
+                            </div>
+                        </div>
+                        <div class="test_content_nr">
+                            <ul>
+                                <li th:id="${'qu_'+(questionStat.index+1)}" th:each="question:${questionlist}">
+                                    <div class="test_content_nr_tt">
+                                        <i th:text="${questionStat.index+1}">1</i><font th:text="${question.question}">在生产管理信息系统中，下列操作步骤能正确将工单推进流程的是（  ）</font>
+                                    </div>
+
+                                    <div class="test_content_nr_main">
+                                        <ul>
+
+                                            <li class="option" th:each="answer:${answer}">
+
+                                                <input type="radio" class="radioOrCheck" th:name="${(questionStat.index+1)}" th:id="${questionStat.index+'_answer'+answerStat.index}" th:value="${(answerStat.index+1)}">
+
+
+                                                <label th:for="${questionStat.index+'_answer'+answerStat.index}">
+                                                    <p class="ue" style="display: inline;" th:text="${answer}">在工具栏中点击“<wor></wor>kflow”标签</p>
+                                                </label>
+                                            </li>
+
+
+                                        </ul>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+            <div class="nr_right">
+                <div class="nr_rt_main">
+                    <div class="rt_nr1">
+                        <div class="rt_nr1_title">
+                            <h1>
+                                <i class="icon iconfont"></i>答题卡
+                            </h1>
+                            <p class="test_time">
+<!--                                <i class="icon iconfont"></i><b class="alt-1">01:40</b>-->
+                            </p>
+                        </div>
+
+                        <div class="rt_content">
+                            <div class="rt_content_tt">
+                                <h2>单选题</h2>
+                                <p>
+<!--                                    <span>共</span><i class="content_lit">60</i><span>题</span>-->
+                                </p>
+                            </div>
+                            <div class="rt_content_nr answerSheet">
+                                <ul>
+<!--                                    ${'/test/'+${testid}+ '#qu_'+(questionStat.index+1)}-->
+                                    <li   th:each="question:${questionlist}"><a
+                                            th:id="${'answerqu_'+(questionStat.index+1)}"
+
+                                            th:href="'/test/'+${testid}+'#qu_'+${questionStat.index==0?1:questionStat.index}" th:text="${questionStat.index+1}">1</a></li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--nr end-->
+
+
+        <div class="foot"></div>
+
+
+    </div>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- Owl Carousel JS -->
+    <script src="js/owl.carousel.js"></script>
+    <!-- Wow.js -->
+    <script src="js/wow.min.js"></script>    <!-- WayPoints JS -->
+    <script src="js/jquery.waypoints.min.js"></script>
+    <!-- CounterUp JS -->
+    <script src="js/jquery.counterup.min.js"></script>
+    <!-- Smooth Scroll JS -->
+    <!-- Main.js -->
+    <script src="js/main.js"></script>
+
+
+
+
+    <script src="js/jquery.easy-pie-chart.js"></script>
+    <!--时间js-->
+    <script src="/js/jquery.countdown.js"></script>
+    <script>
+        window.jQuery(function ($) {
+            "use strict";
+
+            $('time').countDown({
+                with_separators: false
+            });
+            $('.alt-1').countDown({
+                css_class: 'countdown-alt-1'
+            });
+            $('.alt-2').countDown({
+                css_class: 'countdown-alt-2'
+            });
+
+        });
+
+
+        $(function () {
+            $('li.option label').click(function () {
+                var examId = $(this).closest('.test_content_nr_main').closest('li').attr('id'); // 得到题目ID
+                // var cardLi = $('a[href=/test#'+examId+"]")
+                var cardLi = $('a[id="answer'+examId+'"]')
+                // 设置已答题
+                if (!cardLi.hasClass('hasBeenAnswer')) {
+                    cardLi.addClass('hasBeenAnswer');
+                }
+
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
+<!--下面是无用代码-->
+<a href="" style="display:none">sucai8</a>
+

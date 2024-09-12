@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <base th:href="@{/}">
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Medicust - Health and Medical HTML5 Template" />
+        <meta name="author" content="Envalab" />
+        <title>Medicust - Health and Medical HTML5 Template</title>
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.png" />
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet" />
+        <!-- Bootstrap CSS -->
+        <link href="css/bootstrap-front.min.css" rel="stylesheet" />
+        <!-- FlatIcon CSS -->
+        <link href="css/flaticon.css" rel="stylesheet" />
+        <!-- IcoFont CSS -->
+        <link href="css/icofont.min.css" rel="stylesheet" />
+        <!-- Animate CSS -->
+        <link href="css/animate.css" rel="stylesheet" />
+        <!-- Owl Carousel CSS -->
+        <link href="css/owl.carousel.css" rel="stylesheet" />
+        <!-- Hamburgers CSS -->
+        <link href="css/hamburgers.min.css" rel="stylesheet" />
+        <!-- Style CSS -->
+        <link href="css/style-front.css" rel="stylesheet" />
+        <!-- Responsive CSS -->
+        <link href="css/responsive.css" rel="stylesheet" />
+        <style>
+
+.fun-facts{
+    margin-top: 0px;
+}
+#counter-award::after{
+    content: "";
+}
+#contact1{
+    text-align: center;
+}
+#contact-h2{
+    margin-bottom: 0px;
+}
+        </style>
+    </head>
+    <body style="height: 100%;background: url(../img/bg/02.jpg);">
+        <!-- page-wrapper start   开始的标签-->
+    <div class="page-wrapper">
+                <header>
+                    <div th:replace="~{front/common::topbar}"></div>
+                </header><!-- header -->
+            <main class="site-content">
+                <div class="fun-facts">
+                    <div class="container-xl px-xl-0">
+                        <div class="row justify-content-lg-between align-items-center">
+                            <div class="col-xl-5 col-lg-6 pr-xl-0">
+                                <section id="contact1" class="contact-methods">
+                                    <h2 id="contact-h2" th:text="${res[2]}">无抑郁</h2>
+
+                                </section>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="fun-facts-area">
+                                    <h2 th:text="${res[3]}">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</h2>
+                                    <p>
+
+                                    </p>
+                                    <ul class="clearfix">
+                                        <li>
+                                            <i class="icofont-woman-in-glasses"></i>
+                                            <div class="the_fact">
+                                                <h3 class="counter" th:text="${res[5]}">8648</h3>
+                                                <p>累计测评人数</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="icofont-award"></i>
+                                            <div class="the_fact">
+                                                <h3 id="counter-award" class="counter" th:text="${res[1]}">57658</h3>
+                                                <p>分数</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.fun-facts -->
+            </main><!-- /.site-content -->
+
+        </div>
+        <!-- page-wrapper end -->
+
+        <div class="modal fade" id="popup-video">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <iframe src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back2Top -->
+        <div class="back2Top bg1 wave">
+            <i class="icofont-dotted-up text-white"></i>
+        </div>
+
+        <!-- Required JavaScript Files -->
+        <!-- jQuery JS -->
+        <script src="js/jquery-1.12.4.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <!-- Owl Carousel JS -->
+        <script src="js/owl.carousel.js"></script>
+        <!-- Wow.js -->
+        <script src="js/wow.min.js"></script>
+        <!-- WayPoints JS -->
+        <script src="js/jquery.waypoints.min.js"></script>
+        <!-- CounterUp JS -->
+        <script src="js/jquery.counterup.min.js"></script>
+        <!-- Smooth Scroll JS -->
+        <script src="js/SmoothScroll.js"></script>
+        <!-- Main.js -->
+        <script src="js/main.js"></script>
+
+
+        </script>
+    </body>
+</html>

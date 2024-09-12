@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <base th:href="@{/}">
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Medicust - Health and Medical HTML5 Template" />
+        <meta name="author" content="Envalab" />
+        <title>心理健康测试平台-留言</title>
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.png" />
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet" />
+        <!-- Bootstrap CSS -->
+        <link href="css/bootstrap-front.min.css" rel="stylesheet" />
+        <!-- FlatIcon CSS -->
+        <link href="css/flaticon.css" rel="stylesheet" />
+        <!-- IcoFont CSS -->
+        <link href="css/icofont.min.css" rel="stylesheet" />
+        <!-- Animate CSS -->
+        <link href="css/animate.css" rel="stylesheet" />
+        <!-- Hamburgers CSS -->
+        <link href="css/owl.carousel.css" rel="stylesheet" />
+
+        <link href="css/hamburgers.min.css" rel="stylesheet" />
+        <!-- Style CSS -->
+        <link href="css/style-front.css" rel="stylesheet" />
+        <!-- Responsive CSS -->
+        <link href="css/responsive.css" rel="stylesheet" />
+
+<!--        弹窗-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+        <style>
+            .page_header{
+           background: url(img/leaveword.jpg) no-repeat center center;
+                background-size:cover;  /* 让背景图基于容器大小伸缩 */
+                background-attachment:fixed;        /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */    //此条属性必须设置否则可能无效/
+            background-color:#CCCCCC;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- page-wrapper start -->
+        <div class="page-wrapper">
+            <header>
+                <div th:replace="~{front/common::topbar}"></div>
+            </header><!-- header -->
+            <main class="site-content">
+                <div class="page_header d-flex align-items-center">
+                    <div class="container">
+                        <section>
+                            <h2>心理留言板</h2>
+                            <div class="breadcrumbs">
+                                <a href="#">Home</a>
+                                <span>LeaveWord</span>
+                            </div>
+                        </section>
+                    </div>
+                </div><!-- /.page_header -->
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="section-header text-center col-xl-7">
+                                <h2>我要留言</h2>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-10">
+                                <form class="d-flex flex-wrap justify-content-between contact-form" >
+                                    <div class="text-area text-center" style="margin-left: 20%" >
+                                        <textarea id= "leavetext" placeholder="Message:"  style="height: 300px;width: 600px"></textarea>
+                                        <button id ="leaveword" type="button" class="theme-btn">
+                                            发送留言 <i class="icofont-arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+            </div>
+            <div class="testimony-section" style="padding: 0px">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="section-header text-center col-lg-8">
+                            <h2>热门留言</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="testimony owl-carousel">
+                            <div class="testimony-item" th:each="leaveword,leaveStat:${leavewords}">
+                                <div class="d-flex justify-content-between align-items-center testimony-header">
+                                    <div class="reviewer-photo">
+                                        <img th:id="'img'+${leaveStat.index}" src="img/testimony/01.jpg" alt="Reviewer Name" />
+
+                                    </div>
+                                    <i class="icofont-quote-right"></i>
+                                </div>
+                                <div class="d-flex justify-content-between reviewer">
+                                    <div class="reviewer-detail">
+                                        <h2 th:text="热心网友">Amber Morales</h2>
+                                    </div>
+
+                                </div>
+                                <h2 th:text="${leaveword.content}">Duis aute irure dolor in reprehe voluptate velit esse cillum dolo sunt culpa officia.</h2>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.testimony-section -->
+
+                </div>
+            </main><!-- /.site-content -->
+        </div>
+        <!-- page-wrapper end -->
+
+        <!-- Back2Top -->
+        <div class="back2Top bg1 wave">
+            <i class="icofont-dotted-up text-white"></i>
+        </div>
+
+        <!-- Required JavaScript Files -->
+        <!-- jQuery JS -->
+        <script src="js/jquery-1.12.4.min.js"></script>
+        <!-- Google Map API -->
+
+        <!-- Bootstrap JS -->
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <!-- Wow.js -->
+        <script src="js/wow.min.js"></script>
+        <!-- Smooth Scroll JS -->
+        <script src="js/SmoothScroll.js"></script>
+        <!-- Main.js -->
+        <script src="js/main.js"></script>
+        <script src="js/owl.carousel.js"></script>
+<!--        弹窗-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script th:inline="javascript">
+    var leaveword = [[${leavewords}]]
+   $(function (){
+       console.log(leaveword)
+        var items = ['img/av1.png','img/av2.jpg','img/av3.jpg','img/av4.jpg','img/av5.png']
+        for(var i = 0;i<leaveword.length;i++){
+            var imgid  = 'img'+i;
+            console.log('#'+imgid)
+
+            $('#'+imgid).attr('src',items[Math.floor(Math.random()*items.length)])
+            console.log('#'+imgid)
+        }
+
+
+
+       var btn = $("#leaveword")
+       btn.click(function (){
+           $.ajax({
+               url: '/sendleave',
+               type:'get',
+               data:'leaveword='+$("#leavetext").val(),  //字符串
+               dataType:'text',
+               success:function (data) {
+                   var msg = eval("(" + data + ")"); // 处理返回的string字符串
+                   if(msg.code== 0 ){
+                       $.alert({
+                           title: '通知',
+                           content: '留言发送成功!',
+                       });
+                   }else{
+                       $.alert({
+                           title: 'Alert!',
+                           content: '留言发送失败!',
+                       });
+                   }
+                   $("#leavetext").val("")
+               }
+           })
+       })
+   })
+</script>
+    </body>
+</html>

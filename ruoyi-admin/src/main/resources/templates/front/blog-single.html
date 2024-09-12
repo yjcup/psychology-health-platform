@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <base th:href="@{/}">
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Medicust - Health and Medical HTML5 Template" />
+        <meta name="author" content="Envalab" />
+        <title>Blog Single || Medicust - Health and Medical HTML5 Template</title>
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.png" />
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet" />
+        <!-- Bootstrap CSS -->
+        <link href="css/bootstrap-front.min.css" rel="stylesheet" />
+        <!-- FlatIcon CSS -->
+        <link href="css/flaticon.css" rel="stylesheet" />
+        <!-- IcoFont CSS -->
+        <link href="css/icofont.min.css" rel="stylesheet" />
+        <!-- Animate CSS -->
+        <link href="css/animate.css" rel="stylesheet" />
+        <!-- Hamburgers CSS -->
+        <link href="css/hamburgers.min.css" rel="stylesheet" />
+        <!-- Style CSS -->
+        <link href="css/style-front.css" rel="stylesheet" />
+        <!-- Responsive CSS -->
+        <link href="css/responsive.css" rel="stylesheet" />
+        <style  th:inline="css">
+            .page_header{
+                background: url([(${blog.url})]) no-repeat center center
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- page-wrapper start -->
+        <div class="page-wrapper">
+            <header>
+                <div th:replace="~{front/common::topbar}"></div>
+            </header><!-- header -->
+            <main class="site-content">
+                <div class="page_header d-flex align-items-center">
+                    <div class="container">
+                        <section>
+                            <h2 th:text="${blog.title}">Blog Details</h2>
+                            <div class="breadcrumbs">
+                                <a href="#">Home</a>
+                                <span>Blog</span>
+                            </div>
+                        </section>
+                    </div>
+                </div><!-- /.page_header -->
+                <div class="blog_post">
+                    <div class="container-xl">
+                        <div class="the_post_container">
+                            <!-- the_post start -->
+                            <div  th:utext="${blog.content}"></div>
+
+                            <!-- the_post end -->
+                        </div>
+                    </div>
+                </div>
+            </main><!-- /.site-content -->
+        </div>
+        <!-- page-wrapper end -->
+
+        <!-- Back2Top -->
+        <div class="back2Top bg1 wave">
+            <i class="icofont-dotted-up text-white"></i>
+        </div>
+
+        <!-- Required JavaScript Files -->
+        <!-- jQuery JS -->
+        <script src="js/jquery-1.12.4.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <!-- Wow.js -->
+        <script src="js/wow.min.js"></script>
+        <!-- Smooth Scroll JS -->
+        <script src="js/SmoothScroll.js"></script>
+        <!-- Main.js -->
+        <script src="js/main.js"></script>
+    </body>
+</html>
