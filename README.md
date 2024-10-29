@@ -37,10 +37,9 @@
 
 ## 价格（良心价）
 
-1. **99单项目**
-2. **149包安装**
+1. **199单项目**
+2. **249包安装**
 
-<img src="assets/image-20240912104056239.png" alt="image-20240912104056239" style="zoom:50%;" />
+<img src="https://github.com/user-attachments/assets/64bc1f1b-e63f-41ab-8dcd-257a172ed7ea" alt="image-20240912104056239" style="zoom:50%;" />
 
-<img src="assets/image-20240912104112988.png" alt="image-20240912104112988" style="zoom:50%;" />
 
