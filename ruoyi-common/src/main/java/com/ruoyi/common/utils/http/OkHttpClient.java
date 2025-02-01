@@ -20,10 +20,10 @@ import java.util.Map;
 public class OkHttpClient {
     private volatile static okhttp3.OkHttpClient client;
     private static final Logger log = LoggerFactory.getLogger(OkHttpClient.class);
-    public static String url = "https://api.ownthink.com/bot";
+    public static String url = "https://api.sizhi.com/chat";
     public static Map<String,String> urlMap = new HashMap<String,String>(){
         {
-            put("appid","420931fbec5917ee056119eefaac3cc3");
+            put("appid","3290c535910f446e83ba3732bd05c77a");
             put("userid","fgXEDXpp");
         }
     };
@@ -57,7 +57,7 @@ public class OkHttpClient {
             request = builder.build();
             Response response = OkHttpClient.getInstance().newCall(request).execute();
             String result = response.body().string();
-//            log.info(result);
+            log.info(result);
             if (!response.isSuccessful()) {
                 throw new IOException("三方接口返回http状态码为" + response.code());
             }
@@ -70,8 +70,9 @@ public class OkHttpClient {
 
 
     public static String sendMessage(String message){
+        System.out.println(message);
         JSONObject object = JSONObject.parseObject(syncGet(message));
-        if("success".equals(object.get("message"))){
+        if((int)object.get("status")==0){
             String o = (String)object.getJSONObject("data").getJSONObject("info").get("text");
             return o;
         }else{
